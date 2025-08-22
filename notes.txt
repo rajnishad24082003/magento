@@ -1,0 +1,16 @@
+*. folder structure(casing is imp)
+
+---magento2---app---code---Parentfolder---Childfolder
+
+
+*. to open project code             -> code /var/www/html/magento2
+
+*. permissions can be a issue       -> sudo su
+
+*. enabling an extension            -> bin/magento module:enable Parentfolder_ChildFolder
+
+*. flush cache                      -> bin/magento cache:flush
+
+*. to see all the enabled modules   -> bin/magento module:status
+
+*. update all modules               -> bin/magento setup:upgrade
