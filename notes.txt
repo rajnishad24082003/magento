@@ -1,3 +1,74 @@
+*. folder structure :
+
+Magento2/
+├── app/
+│   ├── code/                  (Custom and core modules live here)
+│   │   └── CompanyName/       (Vendor namespace for modules)
+│   │       └── ModuleName/    (Specific module name)
+│   │           ├── Controller/
+│   │           │   └── Index.php   (Default controller file)
+│   │           ├── etc/
+│   │           │   └── frontend/
+│   │           │       └── routes.xml (Defines custom routes/URLs)
+│   │           ├── Model/
+│   │           │   ├── Categories.php (Custom category model)
+│   │           │   └── Product.php    (Custom product model)
+│   │           ├── composer.json      (Module dependencies)
+│   │           └── registration.php   (Registers module in Magento)
+│   ├── design/
+│   │   ├── frontend/  (Custom store theme)
+│   │   └── adminhtml/ (Admin themes)
+│   ├── etc/
+│   │   ├── di.xml    (Dependency Injection config)
+│   │   ├── env.php   (Environment configs: DB, cache, etc.)
+│   │   └── config.php (System-level Magento configs)
+│   └── i18n/         (Multi-language setup)
+│
+├── bin/
+│   └── magento        (CLI tool: setup, deploy, cache, indexer, etc.)
+│
+├── dev/
+│   ├── tests/         (Unit, integration, functional tests)
+│   └── tools/         (Dev utilities like Grunt, testing tools)
+│
+├── generated/
+│   ├── code/          (Proxies, factories, interceptors)
+│   └── metadata/      (Generated DI metadata)
+│
+├── lib/
+│   ├── internal/      (Magento’s internal PHP libraries)
+│   └── web/           (3rd party JS/CSS libs: RequireJS, jQuery)
+│
+├── pub/
+│   ├── static/        (Published static assets: CSS, JS, fonts)
+│   ├── media/         (Uploaded images, product/category media)
+│   └── index.php      (Frontend entry point for public access)
+│
+├── setup/
+│   └── src/           (Magento installer & upgrade scripts)
+│
+├── update/
+│   └── cron/          (Upgrade handling via cron jobs)
+│
+├── var/
+│   ├── cache/         (Cached system data)
+│   ├── page_cache/    (Full Page Cache)
+│   ├── log/           (Application logs)
+│   ├── report/        (Error reports)
+│   └── session/       (Session storage)
+│
+├── vendor/            (Composer-installed packages including Magento core)
+├── .htaccess          (Apache server rules)
+├── composer.json      (Magento dependency definitions)
+├── composer.lock      (Exact versions of installed dependencies)
+├── nginx.conf.sample  (Sample Nginx configuration)
+├── phpserver.js       (Node.js wrapper for PHP built-in server)
+├── index.php          (Magento app entry point)
+├── package.json       (Frontend build dependencies)
+└── Gruntfile.js       (Grunt tasks for static content & LESS compilation)
+
+
+
 *. to open project code             -> code /var/www/html/magento2
 
 *. permissions can be a issue       -> sudo su
@@ -9,3 +80,65 @@
 *. to see all the enabled modules   -> bin/magento module:status
 
 *. update all modules               -> bin/magento setup:upgrade
+
+*. path to binary                   -> /var/www/html/magento2/bin/magento
+
+*. default mode                     ->
+Static files generated on demand.
+Errors are logged, not shown on screen.
+
+*. developer mode                   -> php bin/magento deploy:mode:set developer
+Detailed error messages shown.
+Static files are not cached (always re-generated).
+Enables debugging, logging, and profiler.
+Slows performance but helps development.
+
+*. production mode                  -> php bin/magento deploy:mode:set production
+Static files are pre-generated and deployed (setup:static-content:deploy).
+No detailed error messages (errors go to logs).
+Highest performance.
+
+*. check mode                       -> php bin/magento deploy:mode:show
+
+*. maintenance mode                 -> php bin/magento maintenance:enable
+
+
+| **Category**                 | **Command**                               | **Description**                                                             |
+| ---------------------------- | ----------------------------------------- | --------------------------------------------------------------------------- |
+| **General**                  | `bin/magento list`                        | Lists all available Magento CLI commands.                                   |
+|                              | `bin/magento --help`                      | Shows help information for commands.                                        |
+|                              | `bin/magento --version`                   | Displays Magento version.                                                   |
+|                              | `bin/magento -v`, `-vv`, `-vvv`           | Increase output verbosity (debugging).                                      |
+| **Setup & Deployment**       | `bin/magento setup:upgrade`               | Updates database schema/data after module/theme installation or upgrade.    |
+|                              | `bin/magento setup:di:compile`            | Compiles dependency injection (generates factories, proxies, interceptors). |
+|                              | `bin/magento setup:static-content:deploy` | Deploys static files (CSS, JS, images) for specific languages/themes.       |
+| **Cache Management**         | `bin/magento cache:clean`                 | Cleans cache types enabled in Magento.                                      |
+|                              | `bin/magento cache:flush`                 | Flushes cache storage (including external cache systems).                   |
+|                              | `bin/magento cache:enable <type>`         | Enables specific cache types.                                               |
+|                              | `bin/magento cache:disable <type>`        | Disables specific cache types.                                              |
+|                              | `bin/magento cache:status`                | Displays cache enable/disable status.                                       |
+| **Indexer Management**       | `bin/magento indexer:reindex`             | Reindexes all data (products, categories, URLs).                            |
+|                              | `bin/magento indexer:info`                | Shows available indexers.                                                   |
+|                              | `bin/magento indexer:status`              | Displays status of indexers.                                                |
+|                              | `bin/magento indexer:reset`               | Resets indexers if stuck.                                                   |
+| **Module Management**        | `bin/magento module:status`               | Lists all enabled/disabled modules.                                         |
+|                              | `bin/magento module:enable <Module>`      | Enables specific module(s).                                                 |
+|                              | `bin/magento module:disable <Module>`     | Disables specific module(s).                                                |
+|                              | `bin/magento module:uninstall <Module>`   | Removes a module from the system.                                           |
+| **Theme Management**         | `bin/magento theme:status`                | Shows available themes.                                                     |
+|                              | `bin/magento theme:enable <Theme>`        | Enables a theme.                                                            |
+|                              | `bin/magento theme:disable <Theme>`       | Disables a theme.                                                           |
+| **Database Management**      | `bin/magento db:status`                   | Checks database schema status.                                              |
+|                              | `bin/magento db:console`                  | Opens MySQL console with Magento DB credentials.                            |
+| **Admin User Management**    | `bin/magento admin:user:create`           | Creates a new admin user via CLI.                                           |
+|                              | `bin/magento info:adminuri`               | Displays the custom admin login URL.                                        |
+| **Maintenance & Site Modes** | `bin/magento maintenance:enable`          | Enables maintenance mode (site unavailable to visitors).                    |
+|                              | `bin/magento maintenance:disable`         | Disables maintenance mode.                                                  |
+|                              | `bin/magento maintenance:status`          | Shows maintenance mode status.                                              |
+|                              | `bin/magento maintenance:allow-ips <IP>`  | Allows specific IPs during maintenance.                                     |
+|                              | `bin/magento deploy:mode:show`            | Shows current application mode (`developer` / `production`).                |
+|                              | `bin/magento deploy:mode:set production`  | Switches site to production mode.                                           |
+|                              | `bin/magento deploy:mode:set developer`   | Switches site to developer mode.                                            |
+| **Sample Data**              | `bin/magento sampledata:deploy`           | Installs Magento sample data modules.                                       |
+|                              | `bin/magento sampledata:remove`           | Removes installed sample data.                                              |
+|                              | `bin/magento sampledata:reset`            | Resets sample data for updates.                                             |

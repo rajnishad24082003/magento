@@ -36,14 +36,17 @@
             }
           ]
         },
-        { "design": ["frontend themes", "adminhtml themes"] },
+        {
+          "design": ["frontend(custom store theme)", "adminhtml(admin themes)"]
+        },
         {
           "etc": [
             "di.xml (Dependency Injection config)",
             "env.php (Environment-specific configs: DB, cache, etc.)",
             "config.php (System-level Magento configs)"
           ]
-        }
+        },
+        "i18n(this is for multi-language setup)"
       ]
     },
     {
