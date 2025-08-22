@@ -1,8 +1,3 @@
-*. folder structure(casing is imp)
-
----magento2---app---code---Parentfolder---Childfolder
-
-
 *. to open project code             -> code /var/www/html/magento2
 
 *. permissions can be a issue       -> sudo su

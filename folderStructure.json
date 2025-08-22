@@ -1,0 +1,102 @@
+{
+  "Magento2": [
+    {
+      "app": [
+        {
+          "code (Custom and core modules live here)": [
+            {
+              "CompanyName (Vendor namespace for modules)": [
+                {
+                  "ModuleName (Specific module name)": [
+                    {
+                      "Controller (Handles HTTP requests)": [
+                        "Index.php (Default controller file)"
+                      ]
+                    },
+                    {
+                      "etc (Configuration files)": [
+                        {
+                          "frontend (Frontend specific configs)": [
+                            "routes.xml (Defines custom routes/URLs)"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "Model (Business logic layer)": [
+                        "Categories.php (Custom category model)",
+                        "Product.php (Custom product model)"
+                      ]
+                    },
+                    "composer.json (Module dependencies)",
+                    "registration.php (Registers the module in Magento)"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        { "design": ["frontend themes", "adminhtml themes"] },
+        {
+          "etc": [
+            "di.xml (Dependency Injection config)",
+            "env.php (Environment-specific configs: DB, cache, etc.)",
+            "config.php (System-level Magento configs)"
+          ]
+        }
+      ]
+    },
+    {
+      "bin": ["magento (CLI tool: setup, deploy, cache, indexer, etc.)"]
+    },
+    {
+      "dev": [
+        "tests (Unit, integration, functional tests)",
+        "tools (Developer utilities like Grunt, testing tools)"
+      ]
+    },
+    {
+      "generated": [
+        "code (Generated proxies, factories, interceptors)",
+        "metadata (Generated DI metadata)"
+      ]
+    },
+    {
+      "lib": [
+        "internal (Magento’s internal PHP libraries)",
+        "web (3rd party JavaScript/CSS libraries like RequireJS, jQuery)"
+      ]
+    },
+    {
+      "pub": [
+        "static (Published static assets: CSS, JS, fonts)",
+        "media (Uploaded images, product/category media)",
+        "index.php (Frontend entry point for public access)"
+      ]
+    },
+    {
+      "setup": ["src (Magento installer & upgrade scripts)"]
+    },
+    {
+      "update": ["cron (Upgrade handling files triggered by cron jobs)"]
+    },
+    {
+      "var": [
+        "cache (Cached system data)",
+        "page_cache (Full Page Cache)",
+        "log (Application logs)",
+        "report (Error reports)",
+        "session (Session storage)"
+      ]
+    },
+    "vendor (Composer-installed packages including Magento core)",
+    ".htaccess (Apache server rules for security/performance)",
+    "composer.json (Magento dependency definitions)",
+    "composer.lock (Exact versions of installed dependencies)",
+    "nginx.conf.sample (Sample Nginx configuration)",
+    "phpserver.js (Node.js wrapper for PHP built-in server)",
+    "index.php (Entry point for Magento app)",
+    "package.json (Frontend build dependencies)",
+    "Gruntfile.js (Grunt tasks for static content & LESS compilation)"
+  ]
+}
