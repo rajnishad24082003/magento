@@ -9,9 +9,9 @@
                 {
                   "ModuleName (Specific module name)": [
                     {
-                      "Controller (Handles HTTP requests)": [
-                        "Index.php (Default controller file)"
-                      ]
+                      "Controller (Handles HTTP requests)": {
+                        "Index": ["Index.php (Default controller file)"]
+                      }
                     },
                     {
                       "etc (Configuration files)": [

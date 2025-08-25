@@ -5,12 +5,13 @@ Magento2/
 │   ├── code/                  (Custom and core modules live here)
 │   │   └── CompanyName/       (Vendor namespace for modules)
 │   │       └── ModuleName/    (Specific module name)
-│   │           ├── Controller/
-│   │           │   └── Index.php   (Default controller file)
-│   │           ├── etc/
+│   │           ├── Controller/ (Handles HTTP requests)
+│   │           │   └── Index/
+│   │           │       └── Index.php   (Default controller file)
+│   │           ├── etc/       (Configuration files)
 │   │           │   └── frontend/
 │   │           │       └── routes.xml (Defines custom routes/URLs)
-│   │           ├── Model/
+│   │           ├── Model/     (Business logic layer)
 │   │           │   ├── Categories.php (Custom category model)
 │   │           │   └── Product.php    (Custom product model)
 │   │           ├── composer.json      (Module dependencies)
@@ -19,53 +20,54 @@ Magento2/
 │   │   ├── frontend/  (Custom store theme)
 │   │   └── adminhtml/ (Admin themes)
 │   ├── etc/
-│   │   ├── di.xml    (Dependency Injection config)
-│   │   ├── env.php   (Environment configs: DB, cache, etc.)
-│   │   └── config.php (System-level Magento configs)
-│   └── i18n/         (Multi-language setup)
+│   │   ├── di.xml     (Dependency Injection config)
+│   │   ├── env.php    (Environment configs: DB, cache, etc.)
+│   │   └── config.php (System-level Magento configs, all the active or unactive modules are stored here)
+│   └── i18n/          (Multi-language setup)
 │
 ├── bin/
-│   └── magento        (CLI tool: setup, deploy, cache, indexer, etc.)
+│   └── magento         (CLI tool: setup, deploy, cache, indexer, etc.)
 │
 ├── dev/
-│   ├── tests/         (Unit, integration, functional tests)
-│   └── tools/         (Dev utilities like Grunt, testing tools)
+│   ├── tests/          (Unit, integration, functional tests)
+│   └── tools/          (Developer utilities like Grunt, testing tools)
 │
 ├── generated/
-│   ├── code/          (Proxies, factories, interceptors)
-│   └── metadata/      (Generated DI metadata)
+│   ├── code/           (Generated proxies, factories, interceptors)
+│   └── metadata/       (Generated DI metadata)
 │
 ├── lib/
-│   ├── internal/      (Magento’s internal PHP libraries)
-│   └── web/           (3rd party JS/CSS libs: RequireJS, jQuery)
+│   ├── internal/       (Magento’s internal PHP libraries)
+│   └── web/            (3rd party JS/CSS libraries like RequireJS, jQuery)
 │
 ├── pub/
-│   ├── static/        (Published static assets: CSS, JS, fonts)
-│   ├── media/         (Uploaded images, product/category media)
-│   └── index.php      (Frontend entry point for public access)
+│   ├── static/         (Published static assets: CSS, JS, fonts)
+│   ├── media/          (Uploaded images, product/category media)
+│   └── index.php       (Frontend entry point for public access)
 │
 ├── setup/
-│   └── src/           (Magento installer & upgrade scripts)
+│   └── src/            (Magento installer & upgrade scripts)
 │
 ├── update/
-│   └── cron/          (Upgrade handling via cron jobs)
+│   └── cron/           (Upgrade handling files triggered by cron jobs)
 │
 ├── var/
-│   ├── cache/         (Cached system data)
-│   ├── page_cache/    (Full Page Cache)
-│   ├── log/           (Application logs)
-│   ├── report/        (Error reports)
-│   └── session/       (Session storage)
+│   ├── cache/          (Cached system data)
+│   ├── page_cache/     (Full Page Cache)
+│   ├── log/            (Application logs)
+│   ├── report/         (Error reports)
+│   └── session/        (Session storage)
 │
-├── vendor/            (Composer-installed packages including Magento core)
-├── .htaccess          (Apache server rules)
-├── composer.json      (Magento dependency definitions)
-├── composer.lock      (Exact versions of installed dependencies)
-├── nginx.conf.sample  (Sample Nginx configuration)
-├── phpserver.js       (Node.js wrapper for PHP built-in server)
-├── index.php          (Magento app entry point)
-├── package.json       (Frontend build dependencies)
-└── Gruntfile.js       (Grunt tasks for static content & LESS compilation)
+├── vendor/             (Composer-installed packages including Magento core)
+├── .htaccess           (Apache server rules for security/performance)
+├── composer.json       (Magento dependency definitions)
+├── composer.lock       (Exact versions of installed dependencies)
+├── nginx.conf.sample   (Sample Nginx configuration)
+├── phpserver.js        (Node.js wrapper for PHP built-in server)
+├── index.php           (Entry point for Magento app)
+├── package.json        (Frontend build dependencies)
+└── Gruntfile.js        (Grunt tasks for static content & LESS compilation)
+
 
 
 
@@ -79,7 +81,7 @@ Magento2/
 
 *. to see all the enabled modules   -> bin/magento module:status
 
-*. update all modules               -> bin/magento setup:upgrade
+*. update all modules(use it after adding or removing a module)               -> bin/magento setup:upgrade
 
 *. path to binary                   -> /var/www/html/magento2/bin/magento
 
@@ -142,3 +144,13 @@ Highest performance.
 | **Sample Data**              | `bin/magento sampledata:deploy`           | Installs Magento sample data modules.                                       |
 |                              | `bin/magento sampledata:remove`           | Removes installed sample data.                                              |
 |                              | `bin/magento sampledata:reset`            | Resets sample data for updates.                                             |
+
+
+
+adding new company and module:
+1. app->code(new folder)->crtl+shift+p->magentoWizard->companyname->ModuleName->sudo bin/magento module:enable Parentfolder_ChildFolder(cmd)->sudo bin/magento setup:upgrade
+2. code/Companyname/Modulename/etc/frontend/routes.xml->edit <route id="test1" frontName="test1">
+3. code/CompanyName/ModuleName/Controller/Index/Index.php->edit the execute() method
+4. sudo php bin/magento setup:upgrade
+
+
